@@ -17,6 +17,7 @@ Easy, fast, and cheap LLM serving for everyone
 ---
 
 *Latest News* 🔥
+- [2023/08] We would like to express our sincere gratitude to [Andreessen Horowitz](https://a16z.com/2023/08/30/supporting-the-open-source-ai-community/) (a16z) for providing a generous grant to support the open-source development and research of vLLM.
 - [2023/07] Added support for LLaMA-2! You can run and serve 7B/13B/70B LLaMA-2s on vLLM with a single command!
 - [2023/06] Serving vLLM On any Cloud with SkyPilot. Check out a 1-click [example](https://github.com/skypilot-org/skypilot/blob/master/llm/vllm) to start the vLLM demo, and the [blog post](https://blog.skypilot.co/serving-llm-24x-faster-on-the-cloud-with-vllm-and-skypilot/) for the story behind vLLM development on the clouds.
 - [2023/06] We officially released vLLM! FastChat-vLLM integration has powered [LMSYS Vicuna and Chatbot Arena](https://chat.lmsys.org) since mid-April. Check out our [blog post](https://vllm.ai).
@@ -42,7 +43,7 @@ vLLM is flexible and easy to use with:
 
 vLLM seamlessly supports many Huggingface models, including the following architectures:
 
-- Aqualia (`BAAI/Aquila-7B`, `BAAI/AquilaChat-7B`, etc.)
+- Aquila (`BAAI/Aquila-7B`, `BAAI/AquilaChat-7B`, etc.)
 - Baichuan (`baichuan-inc/Baichuan-7B`, `baichuan-inc/Baichuan-13B-Chat`, etc.)
 - BLOOM (`bigscience/bloom`, `bigscience/bloomz`, etc.)
 - Falcon (`tiiuae/falcon-7b`, `tiiuae/falcon-40b`, `tiiuae/falcon-rw-7b`, etc.)
