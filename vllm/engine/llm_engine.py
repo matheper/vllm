@@ -626,11 +626,12 @@ class LLMEngine:
 
     def _decode_sequence(self, seq: Sequence) -> None:
         """Decodes the new token for a sequence."""
-        for echo_logprob in seq.echo_logprobs[-1]:
+        # Decode echo tokens first.
+        for echo_token_id, _ in seq.echo_logprobs:
             new_token, new_output_text = detokenize_incrementally(
                 self.tokenizer,
                 seq.output_tokens,
-                echo_logprob.output_token,
+                echo_token_id,
                 skip_special_tokens=True,
             )
             if new_token is not None:

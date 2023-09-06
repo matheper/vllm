@@ -1,7 +1,7 @@
 """Sequence and its related classes."""
 import copy
 import enum
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Optional, Tuple, Union
 
 from vllm.block import LogicalTokenBlock
 from vllm.sampling_params import SamplingParams
@@ -126,7 +126,7 @@ class Sequence:
         self.output_logprobs: List[Dict[int, float]] = []
         self.output_tokens: List[str] = []
         self.output_text = ""
-        self.echo_logprobs: List[Dict[int, float]] = []
+        self.echo_logprobs: List[Tuple[int, float]] = []
 
         self.logical_token_blocks: List[LogicalTokenBlock] = []
         # Initialize the logical token blocks with the prompt token ids.
@@ -160,14 +160,13 @@ class Sequence:
         self,
         token_id: int,
         logprobs: Dict[int, float],
-        echo_logprobs: List[Dict[int, float]],
+        echo_logprobs: List[Tuple[int, float]],  # List["SequenceOutputs"],  # List[Dict[int, float]],
     ) -> None:
         assert token_id in logprobs
-        for echo in echo_logprobs:
-            self.output_logprobs.append(echo.logprobs)
-            self.data.append_token_id(echo.output_token,
-                                      echo.logprobs[echo.output_token])
-        self.echo_logprobs.append(echo_logprobs)
+        for echo_token_id, echo_logp in echo_logprobs:
+            self.output_logprobs.append({echo_token_id: echo_logp})
+            self.data.append_token_id(echo_token_id, echo_logp)
+        self.echo_logprobs = echo_logprobs
         self._append_tokens_to_blocks([token_id])
         self.output_logprobs.append(logprobs)
         self.data.append_token_id(token_id, logprobs[token_id])
